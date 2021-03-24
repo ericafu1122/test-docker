@@ -24,7 +24,7 @@ RUN apt-get update \
 
 WORKDIR /srslte
 
-git clone https://github.com/srsLTE/srsLTE.git
+git clone https://github.com/jgiovatto/srsLTE.git
 
 WORKDIR /srslte/build
 
