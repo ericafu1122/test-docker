@@ -24,11 +24,17 @@ RUN apt-get update \
 
 WORKDIR /srslte
 
-git clone https://github.com/jgiovatto/srsLTE.git
+# Pinned git commit used for this example
+ARG COMMIT=5d82f19988bc148d7f4cec7a0f29184375a64b40
 
-WORKDIR /srslte/build
+# Download and build
+RUN curl -LO https://github.com/jgiovatto/srsLTE/archive/${COMMIT}.zip \
+ && unzip ${COMMIT}.zip \
+ && rm ${COMMIT}.zip
 
-RUN cmake ../ \
+WORKDIR /srslte/srsLTE-build
+
+RUN cmake ../srsLTE-${COMMIT} \
  && make install
 
 # Update dynamic linker
@@ -37,7 +43,7 @@ RUN ldconfig
 WORKDIR /srslte
 
 # Copy all .example files and remove that suffix
-RUN cp srsLTE/*/*.example ./ \
+RUN cp srsLTE-${COMMIT}/*/*.example ./ \
  && bash -c 'for file in *.example; do mv "$file" "${file%.example}"; done'
 
 # Run commands with line buffered standard output
