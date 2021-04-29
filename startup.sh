@@ -26,7 +26,7 @@ sudo apt-get update && sudo apt-get install -y \
 sudo systemctl enable docker
 
 printf "installing compose"
-until sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose; do
+until sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose; do
     printf '.'
     sleep 2
 done
